@@ -1,4 +1,3 @@
-// Input.js
 import React, { useState } from "react";
 
 const Input = ({ label, id, onValueChange }) => {
