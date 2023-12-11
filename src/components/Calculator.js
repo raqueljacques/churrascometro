@@ -1,19 +1,17 @@
-// Calculator.js
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Accountant from "./Accountant";
+import Input from "./Input";
 import Header from "./Header";
-import ErrorMessage from "./ErrorMessage";
 import ThemeSwitch from "./ThemeSwitch";
 
 const Calculator = () => {
     const [menCount, setMenCount] = useState(0);
     const [womenCount, setWomenCount] = useState(0);
     const [kidCount, setKidCount] = useState(0);
+    const [showErrorMessage, setShowErrorMessage] = useState(false);
 
-    const navigate = useNavigate(); // Corrigido para s
+    const navigate = useNavigate();
 
-    // Função para calcular a quantidade de cada produto com base no número e perfil de pessoas
     const calculateProducts = () => {
         const totalCarne = (
             0.4 * menCount +
@@ -54,10 +52,21 @@ const Calculator = () => {
     };
 
     const handleCalculateClick = () => {
-        const products = calculateProducts();
-        navigate("/result", {
-            state: { totalPeople: menCount + womenCount + kidCount, products },
-        });
+        const totalPeople = menCount + womenCount + kidCount;
+
+        if (totalPeople === 0) {
+            setShowErrorMessage(true);
+
+            setTimeout(() => {
+                setShowErrorMessage(false);
+            }, 5000);
+        } else {
+            setShowErrorMessage(false);
+            const products = calculateProducts();
+            navigate("/result", {
+                state: { totalPeople, products },
+            });
+        }
     };
 
     return (
@@ -65,30 +74,34 @@ const Calculator = () => {
             <div className="calculator">
                 <Header />
                 <div className="row-first">
-                    <Accountant
+                    <Input
                         label="Homens"
                         id="men"
                         onValueChange={handleMenChange}
                     />
-                    <Accountant
+                    <Input
                         label="Mulheres"
                         id="women"
                         onValueChange={handleWomenChange}
                     />
-                    <Accountant
+                    <Input
                         label="Crianças"
                         id="kid"
                         onValueChange={handleKidChange}
                     />
-                    <button
-                        className="default-button"
-                        onClick={handleCalculateClick}
-                    >
-                        Calcular
-                    </button>
                 </div>
+                {showErrorMessage && (
+                    <p style={{ color: "white" }}>
+                        Por favor, selecione a quantidade de pessoas.
+                    </p>
+                )}
+                <button
+                    className="default-button"
+                    onClick={handleCalculateClick}
+                >
+                    Calcular
+                </button>
             </div>
-            <ErrorMessage />
             <ThemeSwitch />
         </>
     );

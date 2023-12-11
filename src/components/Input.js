@@ -1,7 +1,7 @@
-// Accountant.js
+// Input.js
 import React, { useState } from "react";
 
-const Accountant = ({ label, id, onValueChange }) => {
+const Input = ({ label, id, onValueChange }) => {
     const [value, setValue] = useState(0);
 
     const handleDecrement = () => {
@@ -42,4 +42,4 @@ const Accountant = ({ label, id, onValueChange }) => {
     );
 };
 
-export default Accountant;
+export default Input;
