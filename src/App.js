@@ -1,23 +1,22 @@
-import './App.css';
-import React from 'react';
-import Header from './components/Header';
-import Title from './components/Title';
-import Button from './components/Button';
-import ContainerBox from './components/ContainerBox';
-import ThemeSwitch from './components/ThemeSwitch';
+import "./App.css";
+import React from "react";
+import Title from "./components/Title";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Result from "./components/Result";
+import Calculator from "./components/Calculator";
 
 function App() {
-  return (
-    <div className="container">
-      <Title/>
-      <div className='calculator'>
-        <Header/>
-        <ContainerBox/>
-      </div>
-      <Button/>
-      <ThemeSwitch/>
-    </div>
-  );
+    return (
+        <BrowserRouter>
+            <div className="container">
+                <Title />
+                <Routes>
+                    <Route path="/" element={<Calculator />} />
+                    <Route path="/result" element={<Result />} />
+                </Routes>
+            </div>
+        </BrowserRouter>
+    );
 }
 
 export default App;
