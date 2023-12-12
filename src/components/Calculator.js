@@ -2,9 +2,14 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Input from "./Input";
 import Header from "./Header";
-import ThemeSwitch from "./ThemeSwitch";
+import Button from "./Button";
 
 const Calculator = () => {
+    const headerTitle = [
+        "Precisa de uma ajudinha com o churrasco? :)",
+        "Quantas pessoas vão participar?",
+    ];
+
     const [menCount, setMenCount] = useState(0);
     const [womenCount, setWomenCount] = useState(0);
     const [kidCount, setKidCount] = useState(0);
@@ -63,47 +68,44 @@ const Calculator = () => {
         } else {
             setShowErrorMessage(false);
             const products = calculateProducts();
+            const people = {
+                menCount,
+                womenCount,
+                kidCount,
+            };
             navigate("/result", {
-                state: { totalPeople, products },
+                state: { people, products },
             });
         }
     };
 
     return (
-        <>
-            <div className="calculator">
-                <Header />
-                <div className="row-first">
-                    <Input
-                        label="Homens"
-                        id="men"
-                        onValueChange={handleMenChange}
-                    />
-                    <Input
-                        label="Mulheres"
-                        id="women"
-                        onValueChange={handleWomenChange}
-                    />
-                    <Input
-                        label="Crianças"
-                        id="kid"
-                        onValueChange={handleKidChange}
-                    />
-                </div>
-                {showErrorMessage && (
-                    <p style={{ color: "white" }}>
-                        Por favor, selecione a quantidade de pessoas.
-                    </p>
-                )}
-                <button
-                    className="default-button"
-                    onClick={handleCalculateClick}
-                >
-                    Calcular
-                </button>
+        <div className="calculator">
+            <Header headerTitle={headerTitle} />
+            <div className="row-first">
+                <Input
+                    label="Homens"
+                    id="men"
+                    onValueChange={handleMenChange}
+                />
+                <Input
+                    label="Mulheres"
+                    id="women"
+                    onValueChange={handleWomenChange}
+                />
+                <Input
+                    label="Crianças"
+                    id="kid"
+                    onValueChange={handleKidChange}
+                />
             </div>
-            <ThemeSwitch />
-        </>
+            {showErrorMessage && (
+                <p style={{ color: "white" }}>
+                    Por favor, selecione a quantidade de pessoas.
+                </p>
+            )}
+            <Button onClick={handleCalculateClick} label="Calcular" />
+        </div>
     );
 };
 

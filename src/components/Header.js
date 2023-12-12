@@ -1,13 +1,16 @@
-const Header = () => {
-    return(
+import React from "react";
+
+const Header = ({ headerTitle }) => {
+    return (
         <>
-            <h3>Precisa de uma ajudinha com o churrasco? :)</h3>
-            <br />
-            <h3>
-                Quantas pessoas vão participar?
-            </h3>
+            {headerTitle.map((title, index) => (
+                <React.Fragment key={index}>
+                    <h3>{title}</h3>
+                    <br />
+                </React.Fragment>
+            ))}
         </>
-    )
-}
+    );
+};
 
 export default Header;
