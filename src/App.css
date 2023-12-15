@@ -225,7 +225,6 @@ form {
 #no-input {
   color: rgb(220, 52, 52);
   font-size: small;
-  visibility: hidden;
 }
 
 #nav-container {
@@ -237,7 +236,7 @@ form {
   left: 200px;
   border: none;
   background: none;
-  color: #151213;
+  color: #ffffff;
   cursor: pointer;
 }
 
@@ -246,7 +245,7 @@ form {
   right: 200px;
   border: none;
   background: none;
-  color: #151213;
+  color: #ffffff;
   cursor: pointer;
 }
 

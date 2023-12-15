@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import ThemeSwitch from "./ThemeSwitch";
-import Title from "./Title";
-import Button from "./Button";
+import ThemeSwitch from "../components/ThemeSwitch";
+import Title from "../components/Title";
+import Button from "../components/Button";
 
 const Result = () => {
     const translatedProducts = {
@@ -23,7 +23,6 @@ const Result = () => {
     const { state } = useLocation();
     const navigate = useNavigate();
 
-    // Verifica se existe o estado com os dados
     if (!state || !state.products) {
         return null;
     }
@@ -47,8 +46,18 @@ const Result = () => {
         ));
     };
 
-    const returnHome = () => {
-        navigate(-1);
+    const renderUserData = () => {
+        const user = localStorage.getItem("registerData");
+        return user ? JSON.parse(user).name : "Olá";
+    };
+
+    const returnCalculator = () => {
+        navigate("/");
+    };
+
+    const resetData = () => {
+        localStorage.clear();
+        navigate("/");
     };
 
     return (
@@ -56,7 +65,10 @@ const Result = () => {
             <Title />
             <div className="calculator">
                 <div className="result-total-guest">
-                    <p>Confira a lista para o seu churrasco!</p>
+                    <p>
+                        {renderUserData()}, confira a lista para o seu
+                        churrasco!
+                    </p>
                     <p id="total-guest">
                         {people.menCount + people.womenCount + people.kidCount}{" "}
                         convidado
@@ -71,7 +83,8 @@ const Result = () => {
                     <ul className="results">{renderProductList()}</ul>
                 </div>
                 <div className="row">
-                    <Button onClick={returnHome} label="Novo cálculo" />
+                    <Button onClick={returnCalculator} label="Novo cálculo" />
+                    <Button onClick={resetData} label="Limpar dados" />
                 </div>
             </div>
             <ThemeSwitch />

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Input from "./Input";
-import Header from "./Header";
-import Button from "./Button";
+import Input from "../components/Input";
+import Header from "../components/Header";
+import Button from "../components/Button";
+import ThemeSwitch from "../components/ThemeSwitch";
+import Title from "../components/Title";
 
 const Calculator = () => {
     const headerTitle = [
@@ -17,6 +19,7 @@ const Calculator = () => {
 
     const navigate = useNavigate();
 
+    //TODO: Poderia fazer o calculo só no result.js
     const calculateProducts = () => {
         const totalCarne = (
             0.4 * menCount +
@@ -73,38 +76,51 @@ const Calculator = () => {
                 womenCount,
                 kidCount,
             };
-            navigate("/result", {
-                state: { people, products },
-            });
+            if (localStorage.getItem("registerData") === null) {
+                navigate("/register", {
+                    state: { people, products },
+                });
+            } else {
+                navigate("/result", {
+                    state: { people, products },
+                });
+            }
         }
     };
 
     return (
-        <div className="calculator">
-            <Header headerTitle={headerTitle} />
-            <div className="row-first">
-                <Input
-                    label="Homens"
-                    id="men"
-                    onValueChange={handleMenChange}
-                />
-                <Input
-                    label="Mulheres"
-                    id="women"
-                    onValueChange={handleWomenChange}
-                />
-                <Input
-                    label="Crianças"
-                    id="kid"
-                    onValueChange={handleKidChange}
-                />
-            </div>
-            {showErrorMessage && (
-                <p style={{ color: "white" }}>
+        <div className="container">
+            <Title />
+            <div className="calculator">
+                <Header headerTitle={headerTitle} />
+                <div className="row-first">
+                    <Input
+                        label="Homens"
+                        id="men"
+                        onValueChange={handleMenChange}
+                    />
+                    <Input
+                        label="Mulheres"
+                        id="women"
+                        onValueChange={handleWomenChange}
+                    />
+                    <Input
+                        label="Crianças"
+                        id="kid"
+                        onValueChange={handleKidChange}
+                    />
+                </div>
+                <p
+                    id="invalid-input"
+                    style={{
+                        visibility: showErrorMessage ? "visible" : "hidden",
+                    }}
+                >
                     Por favor, selecione a quantidade de pessoas.
                 </p>
-            )}
-            <Button onClick={handleCalculateClick} label="Calcular" />
+                <Button onClick={handleCalculateClick} label="Calcular" />
+            </div>
+            <ThemeSwitch />
         </div>
     );
 };
