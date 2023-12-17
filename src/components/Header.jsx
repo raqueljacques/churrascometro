@@ -1,6 +1,6 @@
 import React from "react";
 
-const Header = ({ headerTitle }) => {
+const Header = ({ headerTitle, ...props }) => {
     return (
         <>
             {headerTitle.map((title, index) => (

@@ -1,7 +1,7 @@
-const Button = ({ onClick, label }) => {
+const Button = ({ onClick, label, isLoading }) => {
     return (
         <button className="default-button" onClick={onClick}>
-            {label}
+            {isLoading ? "Carregando..." : label}
         </button>
     );
 };

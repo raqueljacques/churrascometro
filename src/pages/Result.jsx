@@ -82,7 +82,14 @@ const Result = () => {
                     </div>
                     <ul className="results">{renderProductList()}</ul>
                 </div>
-                <div className="row">
+                <div
+                    className="row"
+                    style={{
+                        width: "350px",
+                        display: "flex",
+                        justifyContent: "space-between",
+                    }}
+                >
                     <Button onClick={returnCalculator} label="Novo cálculo" />
                     <Button onClick={resetData} label="Limpar dados" />
                 </div>

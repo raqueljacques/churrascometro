@@ -89,6 +89,7 @@ const Calculator = () => {
     };
 
     return (
+        //<Container>
         <div className="container">
             <Title />
             <div className="calculator">
@@ -122,6 +123,7 @@ const Calculator = () => {
             </div>
             <ThemeSwitch />
         </div>
+        //</Container>
     );
 };
 
