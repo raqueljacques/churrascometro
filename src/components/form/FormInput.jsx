@@ -27,7 +27,7 @@ const FormInput = ({
                     touched && !isValid ? "input-error" : ""
                 }`}
                 value={value}
-                onChange={(e) => onChange(id, e.target.value)} // Ensure 'e.target.value' is accessible
+                onChange={(e) => onChange(id, e.target.value)}
                 onBlur={handleBlur}
             />
             {touched && !isValid && <p id={`invalid-${id}`}>{errorMessage}</p>}

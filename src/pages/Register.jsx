@@ -123,7 +123,7 @@ const Register = () => {
     };
 
     const handleBack = () => {
-        //TODO: Poderia voltar lembrando os dados que foram escolhidos na primeira escolha
+        //TODO: Poderia voltar lembrando os dados que foram escolhidos na primeira tela
         navigate("/");
     };
 
